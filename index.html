@@ -1,0 +1,2695 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FoodMart</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+
+    <div id="loader">
+    <img src="assets/logo.png" alt="Logo" class="loader-logo">
+    <div class="spinner"></div>
+    </div>
+
+  <div id="content" style="display:none;">
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <div class="cart-drawer" id="cartDrawer">
+      <div class="cart-head">
+        <div>
+          <h5 style="display: inline">Your Cart</h5>
+          <span id="cartCount">(0 items)</span>
+        </div>
+        <button class="cart-close-btn" id="cartClose">
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <div class="cart-body" id="cartBody"></div>
+      <div class="cart-foot">
+        <div class="cart-subtotal">
+          <span>Subtotal</span>
+          <span id="cartTotal">$0.00</span>
+        </div>
+        <button class="cart-checkout-btn">Proceed to Checkout</button>
+        <button class="cart-continue-btn" id="cartContinue">
+          Continue Shopping
+        </button>
+      </div>
+    </div>
+
+    <header class="fm-header">
+      <div class="container-xl">
+        <div class="fm-top-bar">
+          <a href="#" class="fm-logo">
+            <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+              <rect width="52" height="52" rx="8" fill="#fff8ee" />
+              <text
+                x="26"
+                y="34"
+                text-anchor="middle"
+                font-size="28"
+                font-family="Arial"
+              >
+                🛒
+              </text>
+            </svg>
+            <div class="fm-logo-text">
+              <span class="fm-logo-name">FOOD<span>MART</span></span>
+              <span class="fm-logo-sub">GROCERY STORE</span>
+            </div>
+          </a>
+
+          <div class="fm-search">
+            <div class="fm-search-inner">
+              <div class="fm-search-cat">
+                <select>
+                  <option>Groceries</option>
+                  <option>Fruits</option>
+                  <option>Vegetables</option>
+                  <option>Dairy</option>
+                  <option>Bakery</option>
+                </select>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
+              <div class="fm-search-divider"></div>
+              <input
+                type="text"
+                placeholder="Search for more than 20,000 products..."
+              />
+              <button class="fm-search-btn">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="fm-actions">
+            <div class="fm-support">
+              <span class="fm-support-label">For Support?</span>
+              <a href="tel:+98034984089" class="fm-support-phone"
+                >+980-34984089</a
+              >
+            </div>
+            <button class="fm-icon-btn" title="Account">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </button>
+            <button class="fm-icon-btn" title="Wishlist">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                />
+              </svg>
+            </button>
+            <button class="fm-cart-btn" id="cartToggleDesktop">
+              <div class="fm-cart-info">
+                <span class="fm-cart-label"
+                  >Your Cart
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polyline points="6 9 12 15 18 9" /></svg
+                ></span>
+                <span class="fm-cart-price" id="cartPriceDesktop">$0.00</span>
+              </div>
+            </button>
+            <button
+              class="fm-icon-btn fm-cart-mobile"
+              id="cartToggleMobile"
+              title="Cart"
+              style="display: none; position: relative"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path
+                  d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.99-1.78l1.38-7.22H6"
+                />
+              </svg>
+              <span class="fm-badge" id="cartBadge">0</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="fm-nav">
+      <div class="container-xl">
+        <div class="fm-nav-inner">
+          <div class="fm-departments dropdown">
+            <button
+              class="fm-dept-btn dropdown-toggle"
+              data-bs-toggle="dropdown"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+              <span class="dept-text">Shop by Departments</span>
+              <svg
+                class="fm-dept-arrow"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <ul class="dropdown-menu fm-dept-menu">
+              <li><a class="dropdown-item" href="#">Fresh Produce</a></li>
+              <li><a class="dropdown-item" href="#">Meat & Seafood</a></li>
+              <li><a class="dropdown-item" href="#">Dairy & Eggs</a></li>
+              <li><a class="dropdown-item" href="#">Bakery</a></li>
+              <li><a class="dropdown-item" href="#">Frozen Foods</a></li>
+              <li><a class="dropdown-item" href="#">Beverages</a></li>
+              <li><a class="dropdown-item" href="#">Snacks</a></li>
+            </ul>
+          </div>
+          <ul class="fm-nav-links">
+            <li><a href="#">Women</a></li>
+            <li><a href="#">Men</a></li>
+            <li><a href="#">Kids</a></li>
+            <li><a href="#">Accessories</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"
+                >Pages ▾</a
+              >
+              <ul class="dropdown-menu fm-dd-menu">
+                <li><a class="dropdown-item" href="#">About Us</a></li>
+                <li><a class="dropdown-item" href="#">Contact</a></li>
+                <li><a class="dropdown-item" href="#">FAQ</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Brand</a></li>
+            <li><a href="#" class="fm-sale">Sale</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section id="hero-shop">
+        <div class="container-xl">
+          <div class="hero-grid">
+            <div
+              id="heroCarousel"
+              class="carousel slide hero-slider"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-inner">
+                <div class="carousel-item active" style="background: #deeaf7">
+                  <div class="hero-slide">
+                    <div class="slide-content">
+                      <span class="slide-tag">100% Natural</span>
+                      <h1 class="slide-title">Fresh Smoothie & Summer Juice</h1>
+                      <p class="slide-desc">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Dignissim massa diam elementum.
+                      </p>
+                      <a href="#" class="slide-btn">SHOP NOW</a>
+                    </div>
+                    <div class="slide-img-wrap">
+                      <img
+                        src="assets/product-thumb-1.png"
+                        alt="Smoothie"
+                        class="slide-img"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item" style="background: #fef3e2">
+                  <div class="hero-slide">
+                    <div class="slide-content">
+                      <span class="slide-tag">100% Fresh</span>
+                      <h1 class="slide-title">
+                        Organic Fruits & Healthy Snacks
+                      </h1>
+                      <p class="slide-desc">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Dignissim massa diam elementum.
+                      </p>
+                      <a href="#" class="slide-btn">SHOP NOW</a>
+                    </div>
+                    <div class="slide-img-wrap">
+                      <img
+                        src="assets/product-thumb-1.png"
+                        alt="Fruits"
+                        class="slide-img"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item" style="background: #edf7ee">
+                  <div class="hero-slide">
+                    <div class="slide-content">
+                      <span class="slide-tag">Best Quality</span>
+                      <h1 class="slide-title">Fresh Baked Bread & Products</h1>
+                      <p class="slide-desc">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Dignissim massa diam elementum.
+                      </p>
+                      <a href="#" class="slide-btn">SHOP NOW</a>
+                    </div>
+                    <div class="slide-img-wrap">
+                      <img
+                        src="assets/product-thumb-1.png"
+                        alt="Bread"
+                        class="slide-img"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-indicators hero-dots">
+                <button
+                  type="button"
+                  data-bs-target="#heroCarousel"
+                  data-bs-slide-to="0"
+                  class="hero-dot active"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#heroCarousel"
+                  data-bs-slide-to="1"
+                  class="hero-dot"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#heroCarousel"
+                  data-bs-slide-to="2"
+                  class="hero-dot"
+                ></button>
+              </div>
+            </div>
+
+            <div class="hero-banners">
+              <a href="#" class="hero-banner" style="background: #edf7ee">
+                <div class="banner-text">
+                  <span class="banner-discount">20% Off</span>
+                  <div class="banner-divider">
+                    <span></span><small>SALE</small><span></span>
+                  </div>
+                  <h3 class="banner-title">Fruits & Vegetables</h3>
+                  <span class="banner-link">Shop Collection →</span>
+                </div>
+                <div class="banner-img-wrap">
+                  <img
+                    src="assets/favicon.png"
+                    alt="Fruits"
+                    class="banner-img"
+                  />
+                </div>
+              </a>
+              <a href="#" class="hero-banner" style="background: #f7f0e8">
+                <div class="banner-text">
+                  <span class="banner-discount">15% Off</span>
+                  <div class="banner-divider">
+                    <span></span><small>SALE</small><span></span>
+                  </div>
+                  <h3 class="banner-title">Baked Products</h3>
+                  <span class="banner-link">Shop Collection →</span>
+                </div>
+                <div class="banner-img-wrap">
+                  <img
+                    src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80"
+                    alt="Baked"
+                    class="banner-img"
+                  />
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cat-section">
+        <div class="container-xl">
+          <div class="sec-header">
+            <h2 class="sec-title">Category</h2>
+            <div class="sec-controls">
+              <a href="#" class="sec-link">View All Categories →</a>
+              <a class="nav-btn" href="#catCarousel" data-bs-slide="prev"
+                >&#8592;</a
+              >
+              <a class="nav-btn" href="#catCarousel" data-bs-slide="next"
+                >&#8594;</a
+              >
+            </div>
+          </div>
+          <div id="catCarousel" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row g-3">
+                  <div class="col-6 col-sm-3">
+                    <div class="cat-card">
+                      <div class="cat-icon" style="color: #7a9c4f">
+                        <svg
+                          width="48"
+                          height="48"
+                          viewBox="0 0 48 48"
+                          fill="none"
+                        >
+                          <path
+                            d="M24 8C18 8 12 14 12 22c0 6 4 11 10 13v5h4v-5c6-2 10-7 10-13 0-8-6-14-12-14z"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                          <path
+                            d="M24 22 L24 35"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                          />
+                          <path
+                            d="M18 18 L24 22 L30 18"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                        </svg>
+                      </div>
+                      <p class="cat-name">Fruits & Veges</p>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="cat-card">
+                      <div class="cat-icon" style="color: #c8872a">
+                        <svg
+                          width="48"
+                          height="48"
+                          viewBox="0 0 48 48"
+                          fill="none"
+                        >
+                          <rect
+                            x="10"
+                            y="20"
+                            width="28"
+                            height="16"
+                            rx="4"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                          <path
+                            d="M16 20 C16 14 20 10 24 10 C28 10 32 14 32 20"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                          <circle
+                            cx="24"
+                            cy="28"
+                            r="3"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                        </svg>
+                      </div>
+                      <p class="cat-name">Breads & Sweets</p>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="cat-card">
+                      <div class="cat-icon" style="color: #d4a020">
+                        <svg
+                          width="48"
+                          height="48"
+                          viewBox="0 0 48 48"
+                          fill="none"
+                        >
+                          <rect
+                            x="17"
+                            y="8"
+                            width="14"
+                            height="6"
+                            rx="2"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                          <path
+                            d="M14 14 L12 38 H36 L34 14 Z"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                          <path
+                            d="M12 22 H36"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                          />
+                        </svg>
+                      </div>
+                      <p class="cat-name">Beverages</p>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="cat-card">
+                      <div class="cat-icon" style="color: #c0392b">
+                        <svg
+                          width="48"
+                          height="48"
+                          viewBox="0 0 48 48"
+                          fill="none"
+                        >
+                          <path
+                            d="M20 8 C20 8 18 12 18 18 C18 24 21 28 24 30 C27 28 30 24 30 18 C30 12 28 8 28 8"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                          <path
+                            d="M18 30 L16 42 H32 L30 30"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                          <path
+                            d="M16 36 H32"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                          />
+                        </svg>
+                      </div>
+                      <p class="cat-name">Wines & Spirits</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row g-3">
+                  <div class="col-6 col-sm-3">
+                    <div class="cat-card">
+                      <div class="cat-icon" style="color: #e0a030">
+                        <svg
+                          width="48"
+                          height="48"
+                          viewBox="0 0 48 48"
+                          fill="none"
+                        >
+                          <ellipse
+                            cx="24"
+                            cy="26"
+                            rx="14"
+                            ry="10"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                          <path
+                            d="M24 16 C24 16 20 10 24 8 C28 10 24 16 24 16"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                        </svg>
+                      </div>
+                      <p class="cat-name">Dairy & Eggs</p>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="cat-card">
+                      <div class="cat-icon" style="color: #c0392b">
+                        <svg
+                          width="48"
+                          height="48"
+                          viewBox="0 0 48 48"
+                          fill="none"
+                        >
+                          <path
+                            d="M12 16 H36 L32 36 H16 Z"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                          <path
+                            d="M18 16 L16 10 H32 L30 16"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                        </svg>
+                      </div>
+                      <p class="cat-name">Meat & Poultry</p>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="cat-card">
+                      <div class="cat-icon" style="color: #2980b9">
+                        <svg
+                          width="48"
+                          height="48"
+                          viewBox="0 0 48 48"
+                          fill="none"
+                        >
+                          <ellipse
+                            cx="24"
+                            cy="28"
+                            rx="12"
+                            ry="7"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                          <path
+                            d="M12 28 C12 18 36 18 36 28"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                          <path
+                            d="M20 21 L16 12"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                          />
+                          <path
+                            d="M28 21 L32 12"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                          />
+                        </svg>
+                      </div>
+                      <p class="cat-name">Seafood</p>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="cat-card">
+                      <div class="cat-icon" style="color: #8e44ad">
+                        <svg
+                          width="48"
+                          height="48"
+                          viewBox="0 0 48 48"
+                          fill="none"
+                        >
+                          <rect
+                            x="10"
+                            y="16"
+                            width="28"
+                            height="22"
+                            rx="3"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                          <path
+                            d="M16 16 V12 H32 V16"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            fill="none"
+                          />
+                          <path
+                            d="M10 24 H38"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                          />
+                        </svg>
+                      </div>
+                      <p class="cat-name">Snacks & Candy</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="brands-section">
+        <div class="container-xl">
+          <div class="sec-header">
+            <h2 class="sec-title">Newly Arrived Brands</h2>
+            <div class="sec-controls">
+              <a href="#" class="sec-link">View All Categories →</a>
+              <a class="nav-btn" href="#brandCarousel" data-bs-slide="prev"
+                >&#8592;</a
+              >
+              <a class="nav-btn" href="#brandCarousel" data-bs-slide="next"
+                >&#8594;</a
+              >
+            </div>
+          </div>
+          <div id="brandCarousel" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row g-3">
+                  <div class="col-12 col-sm-4">
+                    <div class="brand-card">
+                      <div class="brand-thumb" style="background: #e8ddd4">
+                        <img
+                          src="assets/product-thumb-11.jpg"
+                          alt="Amber Jar"
+                        />
+                      </div>
+                      <div class="brand-info">
+                        <span class="brand-label">Amber Jar</span
+                        ><span class="brand-title"
+                          >Honey best nectar you wish to get</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-4">
+                    <div class="brand-card">
+                      <div class="brand-thumb" style="background: #dde8e0">
+                        <img
+                          src="assets/product-thumb-12.jpg"
+                          alt="Green Tea"
+                        />
+                      </div>
+                      <div class="brand-info">
+                        <span class="brand-label">Amber Jar</span
+                        ><span class="brand-title"
+                          >Honey best nectar you wish to get</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-4">
+                    <div class="brand-card">
+                      <div class="brand-thumb" style="background: #d8e4d8">
+                        <img
+                            src="assets/product-thumb-13.jpg"
+                          alt="Canned"
+                        />
+                      </div>
+                      <div class="brand-info">
+                        <span class="brand-label">Amber Jar</span
+                        ><span class="brand-title"
+                          >Honey best nectar you wish to get</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row g-3">
+                  <div class="col-12 col-sm-4">
+                    <div class="brand-card">
+                      <div class="brand-thumb" style="background: #e0d8cc">
+                        <img
+                          src="assets/product-thumb-14.jpg"
+                          alt="Coffee"
+                        />
+                      </div>
+                      <div class="brand-info">
+                        <span class="brand-label">Bean & Co</span
+                        ><span class="brand-title"
+                          >Premium artisan coffee blends from origin</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-4">
+                    <div class="brand-card">
+                      <div class="brand-thumb" style="background: #dce0d4">
+                        <img
+                          src="assets/product-thumb-11.jpg"
+                          alt="Grains"
+                        />
+                      </div>
+                      <div class="brand-info">
+                        <span class="brand-label">GrainCraft</span
+                        ><span class="brand-title"
+                          >Wholesome grains baked fresh every morning</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-4">
+                    <div class="brand-card">
+                      <div class="brand-thumb" style="background: #d8dce0">
+                        <img
+                          src="assets/product-thumb-12.jpg"
+                          alt="Olive"
+                        />
+                      </div>
+                      <div class="brand-info">
+                        <span class="brand-label">Olivio</span
+                        ><span class="brand-title"
+                          >Cold-pressed extra virgin olive oil delights</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="trending">
+        <div class="container-xl">
+          <div class="trending-head">
+            <h2 class="trending-title">Trending Products</h2>
+            <div class="trending-filters">
+              <button class="tf-btn active" data-filter="all">ALL</button>
+              <button class="tf-btn" data-filter="fruits">
+                FRUITS &amp; VEGES
+              </button>
+              <button class="tf-btn" data-filter="juices">JUICES</button>
+            </div>
+          </div>
+          <div class="products-grid" id="productsGrid">
+            <div class="product-card" data-cat="fruits">
+              <div class="product-img-wrap">
+                <span class="product-badge">-30%</span
+                ><button class="product-wish">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                    />
+                  </svg></button
+                ><img
+                  src="assets/post-thumb-2.jpg"
+                  alt="Bananas"
+                  class="product-img"
+                />
+              </div>
+              <div class="product-info">
+                <h4 class="product-name">Sunstar Fresh Bananas</h4>
+                <div class="product-meta">
+                  <span class="product-unit">1 UNIT</span
+                  ><span class="product-rating">⭐ 4.5</span>
+                </div>
+                <div class="product-price">$3.49</div>
+                <div class="product-actions">
+                  <div class="qty-control">
+                    <button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, -1)"
+                    >
+                      −</button
+                    ><span class="qty-num">1</span
+                    ><button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, 1)"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button class="add-cart-btn" onclick="addToCart(this)">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="product-card" data-cat="juices">
+              <div class="product-img-wrap">
+                <span class="product-badge">-30%</span
+                ><button class="product-wish">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                    />
+                  </svg></button
+                ><img
+                  src="assets/post-thumb-3.jpg"
+                  alt="Juice"
+                  class="product-img"
+                />
+              </div>
+              <div class="product-info">
+                <h4 class="product-name">Fresh Orange Juice</h4>
+                <div class="product-meta">
+                  <span class="product-unit">1 UNIT</span
+                  ><span class="product-rating">⭐ 4.5</span>
+                </div>
+                <div class="product-price">$4.99</div>
+                <div class="product-actions">
+                  <div class="qty-control">
+                    <button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, -1)"
+                    >
+                      −</button
+                    ><span class="qty-num">1</span
+                    ><button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, 1)"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button class="add-cart-btn" onclick="addToCart(this)">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="product-card" data-cat="fruits">
+              <div class="product-img-wrap">
+                <button class="product-wish">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                    />
+                  </svg></button
+                ><img
+                  src="assets/thumb-bananas.png"
+                  alt="Cucumber"
+                  class="product-img"
+                />
+              </div>
+              <div class="product-info">
+                <h4 class="product-name">Organic Cucumbers</h4>
+                <div class="product-meta">
+                  <span class="product-unit">1 UNIT</span
+                  ><span class="product-rating">⭐ 4.3</span>
+                </div>
+                <div class="product-price">$2.50</div>
+                <div class="product-actions">
+                  <div class="qty-control">
+                    <button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, -1)"
+                    >
+                      −</button
+                    ><span class="qty-num">1</span
+                    ><button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, 1)"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button class="add-cart-btn" onclick="addToCart(this)">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="product-card" data-cat="juices">
+              <div class="product-img-wrap">
+                <button class="product-wish">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                    />
+                  </svg></button
+                ><img
+                  src="assets/product-thumb-2.png"
+                  alt="Milk"
+                  class="product-img"
+                />
+              </div>
+              <div class="product-info">
+                <h4 class="product-name">Fresh Whole Milk</h4>
+                <div class="product-meta">
+                  <span class="product-unit">1 UNIT</span
+                  ><span class="product-rating">⭐ 4.6</span>
+                </div>
+                <div class="product-price">$2.99</div>
+                <div class="product-actions">
+                  <div class="qty-control">
+                    <button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, -1)"
+                    >
+                      −</button
+                    ><span class="qty-num">1</span
+                    ><button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, 1)"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button class="add-cart-btn" onclick="addToCart(this)">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="product-card" data-cat="fruits">
+              <div class="product-img-wrap">
+                <button class="product-wish">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                    />
+                  </svg></button
+                ><img
+                  src="assets/thumb-tomatoes.png"
+                  alt="Apples"
+                  class="product-img"
+                />
+              </div>
+              <div class="product-info">
+                <h4 class="product-name">Organic Red Apples</h4>
+                <div class="product-meta">
+                  <span class="product-unit">1 UNIT</span
+                  ><span class="product-rating">⭐ 4.7</span>
+                </div>
+                <div class="product-price">$3.49</div>
+                <div class="product-actions">
+                  <div class="qty-control">
+                    <button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, -1)"
+                    >
+                      −</button
+                    ><span class="qty-num">1</span
+                    ><button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, 1)"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button class="add-cart-btn" onclick="addToCart(this)">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="product-card" data-cat="juices">
+              <div class="product-img-wrap">
+                <span class="product-badge">-30%</span
+                ><button class="product-wish">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                    />
+                  </svg></button
+                ><img
+                  src="assets/thumb-milk.png"
+                  alt="Juice"
+                  class="product-img"
+                />
+              </div>
+              <div class="product-info">
+                <h4 class="product-name">Mango Tropical Juice</h4>
+                <div class="product-meta">
+                  <span class="product-unit">1 UNIT</span
+                  ><span class="product-rating">⭐ 4.8</span>
+                </div>
+                <div class="product-price">$5.99</div>
+                <div class="product-actions">
+                  <div class="qty-control">
+                    <button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, -1)"
+                    >
+                      −</button
+                    ><span class="qty-num">1</span
+                    ><button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, 1)"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button class="add-cart-btn" onclick="addToCart(this)">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="product-card" data-cat="fruits">
+              <div class="product-img-wrap">
+                <button class="product-wish">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                    />
+                  </svg></button
+                ><img
+                  src="assets/thumb-cucumber.png"
+                  alt="Avocado"
+                  class="product-img"
+                />
+              </div>
+              <div class="product-info">
+                <h4 class="product-name">Fresh Avocados Pack</h4>
+                <div class="product-meta">
+                  <span class="product-unit">1 UNIT</span
+                  ><span class="product-rating">⭐ 4.5</span>
+                </div>
+                <div class="product-price">$7.00</div>
+                <div class="product-actions">
+                  <div class="qty-control">
+                    <button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, -1)"
+                    >
+                      −</button
+                    ><span class="qty-num">1</span
+                    ><button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, 1)"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button class="add-cart-btn" onclick="addToCart(this)">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="product-card" data-cat="juices">
+              <div class="product-img-wrap">
+                <button class="product-wish">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                    />
+                  </svg></button
+                ><img
+                  src="assets/thumb-biscuits.png"
+                  alt="Milk"
+                  class="product-img"
+                />
+              </div>
+              <div class="product-info">
+                <h4 class="product-name">Almond Oat Milk Blend</h4>
+                <div class="product-meta">
+                  <span class="product-unit">1 UNIT</span
+                  ><span class="product-rating">⭐ 4.4</span>
+                </div>
+                <div class="product-price">$4.50</div>
+                <div class="product-actions">
+                  <div class="qty-control">
+                    <button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, -1)"
+                    >
+                      −</button
+                    ><span class="qty-num">1</span
+                    ><button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, 1)"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button class="add-cart-btn" onclick="addToCart(this)">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="product-card" data-cat="fruits">
+              <div class="product-img-wrap">
+                <span class="product-badge">-30%</span
+                ><button class="product-wish">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                    />
+                  </svg></button
+                ><img
+                  src="assets/thumb-bananas.png"
+                  alt="Tomatoes"
+                  class="product-img"
+                />
+              </div>
+              <div class="product-info">
+                <h4 class="product-name">Cherry Tomatoes Vine</h4>
+                <div class="product-meta">
+                  <span class="product-unit">1 UNIT</span
+                  ><span class="product-rating">⭐ 4.6</span>
+                </div>
+                <div class="product-price">$4.20</div>
+                <div class="product-actions">
+                  <div class="qty-control">
+                    <button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, -1)"
+                    >
+                      −</button
+                    ><span class="qty-num">1</span
+                    ><button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, 1)"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button class="add-cart-btn" onclick="addToCart(this)">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="product-card" data-cat="juices">
+              <div class="product-img-wrap">
+                <button class="product-wish">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                    />
+                  </svg></button
+                ><img
+                  src="assets/post-thumb-2.jpg"
+                  alt="Juice"
+                  class="product-img"
+                />
+              </div>
+              <div class="product-info">
+                <h4 class="product-name">Green Detox Smoothie</h4>
+                <div class="product-meta">
+                  <span class="product-unit">1 UNIT</span
+                  ><span class="product-rating">⭐ 4.5</span>
+                </div>
+                <div class="product-price">$6.50</div>
+                <div class="product-actions">
+                  <div class="qty-control">
+                    <button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, -1)"
+                    >
+                      −</button
+                    ><span class="qty-num">1</span
+                    ><button
+                      class="qty-btn"
+                      onclick="changeProductQty(this, 1)"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button class="add-cart-btn" onclick="addToCart(this)">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="promo-section">
+        <div class="container-xl">
+          <div class="row g-4">
+            <div class="col-md-6">
+              <div class="promo-card" style="background: #fdf0ec">
+                <div class="promo-content">
+                  <span class="promo-badge">Upto 25% Off</span>
+                  <h3 class="promo-title">Luxa Dark Chocolate</h3>
+                  <p class="promo-desc">
+                    Very tasty & creamy vanilla flavour creamy muffins.
+                  </p>
+                  <a href="#" class="promo-btn">SHOW NOW</a>
+                </div>
+                <div class="promo-img-wrap">
+                  <img
+                    src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=300&q=80"
+                    alt="Dark Chocolate"
+                    class="promo-img"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="promo-card" style="background: #e8f4fb">
+                <div class="promo-content">
+                  <span class="promo-badge">Upto 25% Off</span>
+                  <h3 class="promo-title">Creamy Muffins</h3>
+                  <p class="promo-desc">
+                    Very tasty & creamy vanilla flavour creamy muffins.
+                  </p>
+                  <a href="#" class="promo-btn">SHOW NOW</a>
+                </div>
+                <div class="promo-img-wrap">
+                  <img
+                    src="https://images.unsplash.com/photo-1603532648955-039310d9ed75?w=300&q=80"
+                    alt="Creamy Muffins"
+                    class="promo-img"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="best-section">
+        <div class="container-xl">
+          <div class="sec-header">
+            <h2 class="sec-title">Best selling products</h2>
+            <div class="sec-controls">
+              <a href="#" class="sec-link">View All Categories →</a
+              ><a class="nav-btn" href="#bestCarousel" data-bs-slide="prev"
+                >&#8592;</a
+              ><a class="nav-btn" href="#bestCarousel" data-bs-slide="next"
+                >&#8594;</a
+              >
+            </div>
+          </div>
+          <div id="bestCarousel" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row g-3">
+                  <div class="col-6 col-sm-3">
+                    <div class="product-card">
+                      <div class="product-img-wrap">
+                        <span class="product-badge">-15%</span
+                        ><button class="product-wish">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                            />
+                          </svg></button
+                        ><img
+                          src="https://images.unsplash.com/photo-1561136594-7f68413baa99?w=300&q=80"
+                          alt="Tomatoes"
+                          class="product-img"
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">Cherry Tomatoes</div>
+                        <div class="product-meta">
+                          1 UNIT <span class="star">★</span> 4.5
+                        </div>
+                        <div class="product-price">$4.20</div>
+                        <div class="product-footer">
+                          <div class="qty-control">
+                            <button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, -1)"
+                            >
+                              −</button
+                            ><span class="qty-num">1</span
+                            ><button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, 1)"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            class="add-cart-btn"
+                            onclick="addToCart(this)"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="product-card">
+                      <div class="product-img-wrap">
+                        <span class="product-badge">-15%</span
+                        ><button class="product-wish">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                            />
+                          </svg></button
+                        ><img
+                          src="https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=300&q=80"
+                          alt="Ketchup"
+                          class="product-img"
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">Heinz Ketchup</div>
+                        <div class="product-meta">
+                          1 UNIT <span class="star">★</span> 4.5
+                        </div>
+                        <div class="product-price">$3.99</div>
+                        <div class="product-footer">
+                          <div class="qty-control">
+                            <button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, -1)"
+                            >
+                              −</button
+                            ><span class="qty-num">1</span
+                            ><button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, 1)"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            class="add-cart-btn"
+                            onclick="addToCart(this)"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="product-card">
+                      <div class="product-img-wrap">
+                        <span class="product-badge">-15%</span
+                        ><button class="product-wish">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                            />
+                          </svg></button
+                        ><img
+                          src="https://images.unsplash.com/photo-1603833665858-e61d17a86224?w=300&q=80"
+                          alt="Bananas"
+                          class="product-img"
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">Yellow Bananas</div>
+                        <div class="product-meta">
+                          1 UNIT <span class="star">★</span> 4.5
+                        </div>
+                        <div class="product-price">$2.50</div>
+                        <div class="product-footer">
+                          <div class="qty-control">
+                            <button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, -1)"
+                            >
+                              −</button
+                            ><span class="qty-num">1</span
+                            ><button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, 1)"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            class="add-cart-btn"
+                            onclick="addToCart(this)"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="product-card">
+                      <div class="product-img-wrap">
+                        <span class="product-badge">-15%</span
+                        ><button class="product-wish">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                            />
+                          </svg></button
+                        ><img
+                          src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=300&q=80"
+                          alt="Bananas"
+                          class="product-img"
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">Fresh Ripe Bananas</div>
+                        <div class="product-meta">
+                          1 UNIT <span class="star">★</span> 4.5
+                        </div>
+                        <div class="product-price">$18.00</div>
+                        <div class="product-footer">
+                          <div class="qty-control">
+                            <button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, -1)"
+                            >
+                              −</button
+                            ><span class="qty-num">1</span
+                            ><button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, 1)"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            class="add-cart-btn"
+                            onclick="addToCart(this)"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row g-3">
+                  <div class="col-6 col-sm-3">
+                    <div class="product-card">
+                      <div class="product-img-wrap">
+                        <span class="product-badge">-10%</span
+                        ><button class="product-wish">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                            />
+                          </svg></button
+                        ><img
+                          src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=300&q=80"
+                          alt="Avocado"
+                          class="product-img"
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">Organic Fresh Avocado</div>
+                        <div class="product-meta">
+                          1 UNIT <span class="star">★</span> 4.8
+                        </div>
+                        <div class="product-price">$12.00</div>
+                        <div class="product-footer">
+                          <div class="qty-control">
+                            <button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, -1)"
+                            >
+                              −</button
+                            ><span class="qty-num">1</span
+                            ><button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, 1)"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            class="add-cart-btn"
+                            onclick="addToCart(this)"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="product-card">
+                      <div class="product-img-wrap">
+                        <span class="product-badge">-20%</span
+                        ><button class="product-wish">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                            />
+                          </svg></button
+                        ><img
+                          src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=300&q=80"
+                          alt="Honey"
+                          class="product-img"
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">Pure Wild Honey Jar</div>
+                        <div class="product-meta">
+                          1 UNIT <span class="star">★</span> 4.7
+                        </div>
+                        <div class="product-price">$22.00</div>
+                        <div class="product-footer">
+                          <div class="qty-control">
+                            <button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, -1)"
+                            >
+                              −</button
+                            ><span class="qty-num">1</span
+                            ><button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, 1)"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            class="add-cart-btn"
+                            onclick="addToCart(this)"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="product-card">
+                      <div class="product-img-wrap">
+                        <span class="product-badge">-5%</span
+                        ><button class="product-wish">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                            />
+                          </svg></button
+                        ><img
+                          src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=300&q=80"
+                          alt="Apples"
+                          class="product-img"
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">Red Organic Apples</div>
+                        <div class="product-meta">
+                          1 UNIT <span class="star">★</span> 4.6
+                        </div>
+                        <div class="product-price">$9.00</div>
+                        <div class="product-footer">
+                          <div class="qty-control">
+                            <button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, -1)"
+                            >
+                              −</button
+                            ><span class="qty-num">1</span
+                            ><button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, 1)"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            class="add-cart-btn"
+                            onclick="addToCart(this)"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="product-card">
+                      <div class="product-img-wrap">
+                        <span class="product-badge">-12%</span
+                        ><button class="product-wish">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                            />
+                          </svg></button
+                        ><img
+                          src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300&q=80"
+                          alt="Bread"
+                          class="product-img"
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">Sourdough Bread Loaf</div>
+                        <div class="product-meta">
+                          1 UNIT <span class="star">★</span> 4.4
+                        </div>
+                        <div class="product-price">$7.50</div>
+                        <div class="product-footer">
+                          <div class="qty-control">
+                            <button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, -1)"
+                            >
+                              −</button
+                            ><span class="qty-num">1</span
+                            ><button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, 1)"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            class="add-cart-btn"
+                            onclick="addToCart(this)"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="discount-section">
+        <div class="container-xl">
+          <div class="discount-card">
+            <svg class="deco-leaves" viewBox="0 0 200 200" fill="none">
+              <path
+                d="M20 180 C40 140 80 120 60 80 C40 40 10 60 20 180Z"
+                stroke="#c8d8e8"
+                stroke-width="1.5"
+                fill="none"
+              />
+              <path
+                d="M50 190 C70 150 110 130 90 90 C70 50 40 70 50 190Z"
+                stroke="#c8d8e8"
+                stroke-width="1.5"
+                fill="none"
+              />
+              <path
+                d="M10 160 C30 130 60 115 45 85"
+                stroke="#c8d8e8"
+                stroke-width="1.5"
+                fill="none"
+              />
+              <circle cx="120" cy="155" r="3" fill="#c8d8e8" />
+              <circle cx="95" cy="140" r="2" fill="#c8d8e8" />
+              <circle cx="140" cy="170" r="2" fill="#c8d8e8" />
+            </svg>
+            <div class="row align-items-center g-0">
+              <div class="col-md-5 discount-left">
+                <h2 class="discount-heading">
+                  Get <span class="highlight">25%<br />Discount</span> on
+                  your<br />first purchase
+                </h2>
+                <p class="discount-desc">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Dictumst amet, metus, sit massa posuere maecenas. At tellus ut
+                  nunc amet vel egestas.
+                </p>
+              </div>
+              <div class="col-md-5 offset-md-2 discount-right">
+                <div class="discount-form">
+                  <div class="field-group">
+                    <label>Name</label><input type="text" placeholder="Name" />
+                  </div>
+                  <div class="field-group">
+                    <label>Email</label
+                    ><input type="email" placeholder="abc@mail.com" />
+                  </div>
+                  <div class="check-group">
+                    <input type="checkbox" id="subscribe" /><label
+                      for="subscribe"
+                      >Subscribe to the newsletter</label
+                    >
+                  </div>
+                  <button class="submit-btn">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="best-section">
+        <div class="container-xl">
+          <div class="sec-header">
+            <h2 class="sec-title">Most popular products</h2>
+            <div class="sec-controls">
+              <a href="#" class="sec-link">View All Categories →</a
+              ><a class="nav-btn" href="#popularCarousel" data-bs-slide="prev"
+                >&#8592;</a
+              ><a class="nav-btn" href="#popularCarousel" data-bs-slide="next"
+                >&#8594;</a
+              >
+            </div>
+          </div>
+          <div id="popularCarousel" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row g-3">
+                  <div class="col-6 col-sm-3">
+                    <div class="product-card">
+                      <div class="product-img-wrap">
+                        <span class="product-badge">-15%</span
+                        ><button class="product-wish">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                            />
+                          </svg></button
+                        ><img
+                          src="https://images.unsplash.com/photo-1561136594-7f68413baa99?w=300&q=80"
+                          alt=""
+                          class="product-img"
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">Cherry Tomatoes</div>
+                        <div class="product-meta">
+                          1 UNIT <span class="star">★</span> 4.5
+                        </div>
+                        <div class="product-price">$4.20</div>
+                        <div class="product-footer">
+                          <div class="qty-control">
+                            <button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, -1)"
+                            >
+                              −</button
+                            ><span class="qty-num">1</span
+                            ><button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, 1)"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            class="add-cart-btn"
+                            onclick="addToCart(this)"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="product-card">
+                      <div class="product-img-wrap">
+                        <span class="product-badge">-15%</span
+                        ><button class="product-wish">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                            />
+                          </svg></button
+                        ><img
+                          src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=300&q=80"
+                          alt=""
+                          class="product-img"
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">Organic Red Apples</div>
+                        <div class="product-meta">
+                          1 UNIT <span class="star">★</span> 4.7
+                        </div>
+                        <div class="product-price">$3.49</div>
+                        <div class="product-footer">
+                          <div class="qty-control">
+                            <button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, -1)"
+                            >
+                              −</button
+                            ><span class="qty-num">1</span
+                            ><button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, 1)"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            class="add-cart-btn"
+                            onclick="addToCart(this)"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="product-card">
+                      <div class="product-img-wrap">
+                        <span class="product-badge">-15%</span
+                        ><button class="product-wish">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                            />
+                          </svg></button
+                        ><img
+                          src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300&q=80"
+                          alt=""
+                          class="product-img"
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">Sourdough Bread</div>
+                        <div class="product-meta">
+                          1 UNIT <span class="star">★</span> 4.4
+                        </div>
+                        <div class="product-price">$2.99</div>
+                        <div class="product-footer">
+                          <div class="qty-control">
+                            <button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, -1)"
+                            >
+                              −</button
+                            ><span class="qty-num">1</span
+                            ><button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, 1)"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            class="add-cart-btn"
+                            onclick="addToCart(this)"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="product-card">
+                      <div class="product-img-wrap">
+                        <span class="product-badge">-15%</span
+                        ><button class="product-wish">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                            />
+                          </svg></button
+                        ><img
+                          src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=300&q=80"
+                          alt=""
+                          class="product-img"
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">Fresh Avocados</div>
+                        <div class="product-meta">
+                          1 UNIT <span class="star">★</span> 4.8
+                        </div>
+                        <div class="product-price">$7.00</div>
+                        <div class="product-footer">
+                          <div class="qty-control">
+                            <button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, -1)"
+                            >
+                              −</button
+                            ><span class="qty-num">1</span
+                            ><button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, 1)"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            class="add-cart-btn"
+                            onclick="addToCart(this)"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="best-section">
+        <div class="container-xl">
+          <div class="sec-header">
+            <h2 class="sec-title">Just arrived</h2>
+            <div class="sec-controls">
+              <a href="#" class="sec-link">View All Categories →</a
+              ><a class="nav-btn" href="#arrivedCarousel" data-bs-slide="prev"
+                >&#8592;</a
+              ><a class="nav-btn" href="#arrivedCarousel" data-bs-slide="next"
+                >&#8594;</a
+              >
+            </div>
+          </div>
+          <div id="arrivedCarousel" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row g-3">
+                  <div class="col-6 col-sm-3">
+                    <div class="product-card">
+                      <div class="product-img-wrap">
+                        <span class="product-badge">-15%</span
+                        ><button class="product-wish">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                            />
+                          </svg></button
+                        ><img
+                          src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=300&q=80"
+                          alt=""
+                          class="product-img"
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">Wild Honey Jar</div>
+                        <div class="product-meta">
+                          1 UNIT <span class="star">★</span> 4.7
+                        </div>
+                        <div class="product-price">$22.00</div>
+                        <div class="product-footer">
+                          <div class="qty-control">
+                            <button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, -1)"
+                            >
+                              −</button
+                            ><span class="qty-num">1</span
+                            ><button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, 1)"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            class="add-cart-btn"
+                            onclick="addToCart(this)"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="product-card">
+                      <div class="product-img-wrap">
+                        <span class="product-badge">-15%</span
+                        ><button class="product-wish">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                            />
+                          </svg></button
+                        ><img
+                          src="https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=300&q=80"
+                          alt=""
+                          class="product-img"
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">Heinz Ketchup</div>
+                        <div class="product-meta">
+                          1 UNIT <span class="star">★</span> 4.5
+                        </div>
+                        <div class="product-price">$3.99</div>
+                        <div class="product-footer">
+                          <div class="qty-control">
+                            <button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, -1)"
+                            >
+                              −</button
+                            ><span class="qty-num">1</span
+                            ><button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, 1)"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            class="add-cart-btn"
+                            onclick="addToCart(this)"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="product-card">
+                      <div class="product-img-wrap">
+                        <span class="product-badge">-15%</span
+                        ><button class="product-wish">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                            />
+                          </svg></button
+                        ><img
+                          src="https://images.unsplash.com/photo-1603833665858-e61d17a86224?w=300&q=80"
+                          alt=""
+                          class="product-img"
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">Yellow Bananas</div>
+                        <div class="product-meta">
+                          1 UNIT <span class="star">★</span> 4.5
+                        </div>
+                        <div class="product-price">$2.50</div>
+                        <div class="product-footer">
+                          <div class="qty-control">
+                            <button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, -1)"
+                            >
+                              −</button
+                            ><span class="qty-num">1</span
+                            ><button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, 1)"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            class="add-cart-btn"
+                            onclick="addToCart(this)"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <div class="product-card">
+                      <div class="product-img-wrap">
+                        <span class="product-badge">-15%</span
+                        ><button class="product-wish">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                            />
+                          </svg></button
+                        ><img
+                          src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=300&q=80"
+                          alt=""
+                          class="product-img"
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">Fresh Ripe Bananas</div>
+                        <div class="product-meta">
+                          1 UNIT <span class="star">★</span> 4.5
+                        </div>
+                        <div class="product-price">$18.00</div>
+                        <div class="product-footer">
+                          <div class="qty-control">
+                            <button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, -1)"
+                            >
+                              −</button
+                            ><span class="qty-num">1</span
+                            ><button
+                              class="qty-btn"
+                              onclick="changeProductQty(this, 1)"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            class="add-cart-btn"
+                            onclick="addToCart(this)"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="blog">
+  <div class="container-xl">
+
+    <div class="blog-head">
+      <h2 class="blog-title">Our Recent Blog</h2>
+      <a href="#" class="blog-read-all">Read All Articles →</a>
+    </div>
+
+    <div class="blog-grid">
+
+      <article class="blog-card">
+        <a href="#" class="blog-img-wrap">
+          <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=600&q=80" alt="Fruits" class="blog-img"/>
+        </a>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-date">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              22 AUG 2021
+            </span>
+            <span class="blog-cat">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+              </svg>
+              TIPS &amp; TRICKS
+            </span>
+          </div>
+          <h3 class="blog-post-title">
+            <a href="#">Top 10 casual look ideas to dress up your kids</a>
+          </h3>
+          <p class="blog-excerpt">Lorem ipsum dolor sit amet, consectetur adipi elit. Aliquet eleifend viverra enim tincidunt donec quam. A in arcu, hendrerit neque dolor morbi...</p>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <a href="#" class="blog-img-wrap">
+          <img src="https://images.unsplash.com/photo-1596591606975-97ee5cef3a1e?w=600&q=80" alt="Cashew Butter" class="blog-img"/>
+          <span class="blog-img-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C7 3 3 7 3 12s4 9 9 9 9-4 9-9-4-9-9-9zm0 4a1 1 0 110 2 1 1 0 010-2zm1 9H11v-5h2v5z"/></svg>
+          </span>
+        </a>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-date">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              25 AUG 2021
+            </span>
+            <span class="blog-cat">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+              </svg>
+              TRENDING
+            </span>
+          </div>
+          <h3 class="blog-post-title">
+            <a href="#">Latest trends of wearing street wears supremely</a>
+          </h3>
+          <p class="blog-excerpt">Lorem ipsum dolor sit amet, consectetur adipi elit. Aliquet eleifend viverra enim tincidunt donec quam. A in arcu, hendrerit neque dolor morbi...</p>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <a href="#" class="blog-img-wrap">
+          <img src="https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=600&q=80" alt="Broccoli" class="blog-img"/>
+        </a>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-date">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              28 AUG 2021
+            </span>
+            <span class="blog-cat">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+              </svg>
+              INSPIRATION
+            </span>
+          </div>
+          <h3 class="blog-post-title">
+            <a href="#">10 Different Types of comfortable clothes ideas for women</a>
+          </h3>
+          <p class="blog-excerpt">Lorem ipsum dolor sit amet, consectetur adipi elit. Aliquet eleifend viverra enim tincidunt donec quam. A in arcu, hendrerit neque dolor morbi...</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+      </section>
+
+      <section id="app-download">
+  <div class="container-xl">
+    <div class="app-inner">
+
+      <div class="app-phone-wrap">
+      <img src="assets/phone.png" alt="">
+
+      </div>
+
+      <div class="app-content">
+        <h2 class="app-title">Shop faster with foodmart App</h2>
+        <p class="app-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis sed ptibus liberolectus nonet psyroin. Amet sed lorem posuere sit iaculis amet, ac urna. Adipiscing fames semper erat ac in suspendisse iaculis. Amet blandit tortor praesent ante vitae. A, enim pretiummi senectus magna. Sagittis sed ptibus liberolectus non et psyroin.</p>
+        <div class="app-btns">
+          <a href="#" class="app-store-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <div>
+              <span class="store-label">Download on the</span>
+              <span class="store-name">App Store</span>
+            </div>
+          </a>
+          <a href="#" class="app-store-btn">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.18 23.76c.3.16.64.2.97.1l11.44-6.62-2.5-2.5-9.91 9z" fill="#EA4335"/>
+              <path d="M21.6 10.04l-3.1-1.8L15.6 11l2.9 2.9 3.1-1.8c.88-.5.88-1.56 0-2.06z" fill="#FBBC04"/>
+              <path d="M3.18.24C2.86.14 2.52.18 2.22.34L13.08 11.2l2.5-2.5L4.15.14c-.32-.1-.66-.06-.97.1z" fill="#4285F4"/>
+              <path d="M2.22 23.66c.3.16.64.2.97.1l.96-.56 9.93-9.13-2.5-2.5L2.22 23.66z" fill="#34A853"/>
+            </svg>
+            <div>
+              <span class="store-label">GET IT ON</span>
+              <span class="store-name">Google Play</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+      </section>
+
+
+      <section id="also-looking">
+  <div class="container-xl">
+    <h2 class="also-title">People are also looking for</h2>
+    <div class="also-tags">
+      <a href="#" class="also-tag">Blue diamon almonds</a>
+      <a href="#" class="also-tag">Angie's Boomchickapop Corn</a>
+      <a href="#" class="also-tag">Salty kettle Corn</a>
+      <a href="#" class="also-tag">Chobani Greek Yogurt</a>
+      <a href="#" class="also-tag">Sweet Vanilla Yogurt</a>
+      <a href="#" class="also-tag">Foster Farms Takeout Crispy wings</a>
+      <a href="#" class="also-tag">Warrior Blend Organic</a>
+      <a href="#" class="also-tag">Chao Cheese Creamy</a>
+      <a href="#" class="also-tag">Chicken meatballs</a>
+      <a href="#" class="also-tag">Blue diamon almonds</a>
+      <a href="#" class="also-tag">Angie's Boomchickapop Corn</a>
+      <a href="#" class="also-tag">Salty kettle Corn</a>
+      <a href="#" class="also-tag">Chobani Greek Yogurt</a>
+      <a href="#" class="also-tag">Sweet Vanilla Yogurt</a>
+      <a href="#" class="also-tag">Foster Farms Takeout Crispy wings</a>
+      <a href="#" class="also-tag">Warrior Blend Organic</a>
+      <a href="#" class="also-tag">Chao Cheese Creamy</a>
+      <a href="#" class="also-tag">Chicken meatballs</a>
+    </div>
+  </div>
+      </section>
+
+
+      <section id="features-bar">
+  <div class="container-xl">
+    <div class="features-grid">
+
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.99-1.78l1.38-7.22H6"/>
+          </svg>
+        </div>
+        <div class="feature-text">
+          <h4>Free delivery</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="feature-text">
+          <h4>100% secure payment</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <div class="feature-text">
+          <h4>Quality guarantee</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+          </svg>
+        </div>
+        <div class="feature-text">
+          <h4>guaranteed savings</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/>
+          </svg>
+        </div>
+        <div class="feature-text">
+          <h4>Daily offers</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+      </section>
+
+    </main>
+
+    <footer id="footer">
+  <div class="container-xl">
+
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+            <rect width="56" height="56" rx="10" fill="#fff8ee"/>
+            <text x="28" y="38" text-anchor="middle" font-size="30" font-family="Arial">🛒</text>
+          </svg>
+          <div class="footer-logo-text">
+            <span class="footer-logo-name">FOOD<span>MART</span></span>
+            <span class="footer-logo-sub">GROCERY STORE</span>
+          </div>
+        </a>
+
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+            </svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="Twitter">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+            </svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/>
+              <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+            </svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="Amazon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 16s.5 2 6 2 8-2 8-2"/><path d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5 class="footer-col-title">Ultras</h5>
+        <ul class="footer-links">
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Conditions</a></li>
+          <li><a href="#">Our Journals</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Affiliate Programme</a></li>
+          <li><a href="#">Ultras Press</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5 class="footer-col-title">Customer Service</h5>
+        <ul class="footer-links">
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Returns &amp; Refunds</a></li>
+          <li><a href="#">Cookie Guidelines</a></li>
+          <li><a href="#">Delivery Information</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5 class="footer-col-title">Customer Service</h5>
+        <ul class="footer-links">
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Returns &amp; Refunds</a></li>
+          <li><a href="#">Cookie Guidelines</a></li>
+          <li><a href="#">Delivery Information</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-subscribe">
+        <h5 class="footer-col-title">Subscribe Us</h5>
+        <p class="footer-subscribe-desc">Subscribe to our newsletter to get updates about our grand offers.</p>
+        <form class="footer-subscribe-form" onsubmit="handleSubscribe(event)">
+          <input type="email" placeholder="Email Address" class="footer-email-input" required/>
+          <button type="submit" class="footer-subscribe-btn">Subscribe</button>
+        </form>
+        <p class="footer-subscribe-msg" id="subscribeMsg"></p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <div class="container-xl">
+      <div class="footer-bottom-inner">
+        <p>© 2023 Foodmart. All rights reserved.</p>
+        <p>Free HTML Template by <a href="#">TemplatesJungle</a> Distributed by <a href="#">ThemeWagon</a></p>
+      </div>
+    </div>
+  </div>
+
+    </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
