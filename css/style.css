@@ -1141,7 +1141,6 @@ body {
   }
 }
 
-/* TRENDING */
 #trending {
   padding: 50px 0 60px;
   background: #f9f9f9;
@@ -1191,15 +1190,11 @@ body {
           transition: transform 0.25s ease;
         }
 
-        &:hover {
-          color: #333;
-        }
-        &.active {
-          color: #111;
-        }
-        &.active::after {
-          transform: scaleX(1);
-        }
+        &:hover { color: #333; }
+
+        &.active { color: #111; }
+
+        &.active::after { transform: scaleX(1); }
       }
     }
   }
@@ -1208,6 +1203,100 @@ body {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 16px;
+  }
+}
+
+@media (max-width: 991px) {
+  #trending .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  #trending .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  /*
+    المشكلة: على الموبايل الـ .product-actions بيكون ضيق
+    فالـ qty والزرار بيتزاحموا أو بيتقطعوا
+
+    الحل: نخليهم column — qty فوق، زرار تحته كامل العرض
+  */
+  #trending .product-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  #trending .qty-control {
+    justify-content: center;
+    width: 100%;
+  }
+
+  #trending .add-cart-btn {
+    width: 100%;
+    text-align: center;
+    background: #f5a623;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: "Open Sans", sans-serif;
+    transition: background 0.2s;
+  }
+
+  #trending .add-cart-btn:hover,
+  #trending .add-cart-btn.added {
+    background: #e09600;
+    color: #fff;
+  }
+
+  #trending .add-cart-btn.added {
+    background: #4caf50;
+  }
+}
+
+@media (max-width: 480px) {
+  #trending .products-grid {
+    gap: 8px;
+  }
+
+  #trending .product-img-wrap {
+    height: 110px;
+  }
+
+  #trending .product-info {
+    padding: 8px 8px 10px;
+    gap: 3px;
+  }
+
+  #trending .product-name {
+    font-size: 0.76rem;
+  }
+
+  #trending .product-price {
+    font-size: 0.92rem;
+  }
+
+  #trending .qty-btn {
+    width: 22px;
+    height: 22px;
+    font-size: 0.85rem;
+  }
+
+  #trending .qty-num {
+    font-size: 0.78rem;
+  }
+
+  #trending .add-cart-btn {
+    font-size: 0.72rem;
+    padding: 7px 0;
   }
 }
 
